@@ -1,29 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './App.css';
 import Editor from './components/Editor';
 
-class App extends Component {
-  render() {
+function App() {
+  const [html, setHtml] = useState("")
+  const [css, setCss] = useState("");
+  const [js, setJs] = useState("");
+  
+  const options=[{
+    mode: 'xml',
+    theme: 'material',
+    lineNumbers: true
+  },
+  {
+    mode: 'css',
+    theme: 'material',
+    lineNumbers: true
+    },
+  {
+    mode: 'javascript',
+    theme: 'material',
+    lineNumbers: true
+  }]
+  
     return (
       <div>
         <div className="pane top-pane">
-          <Editor /*HTML code editor*/ />
-          <Editor /*CSS code editor*/ />
-          <Editor /*JS code editor*/ />
+          <Editor onChange={setHtml} options={options[0]} value={html}></Editor>
+          <Editor onChange={setCss} options={options[1]} value={css}></Editor>
+          <Editor onChange={setJs} options={options[2]} value={js}></Editor>
         </div>
-        <div className="bottom-pane">
-          <iframe
-            // srcDoc={srcDoc}
-            /*Title option*/
-            /*sandbox option*/
-            /*frameBorder option*/
-            /*width-height option*/
-            /*Title option*/
-          ></iframe>
-        </div>
+        <div className="bottom-pane"></div>
       </div>
     );
-  }
+  
 }
 
 export default App;

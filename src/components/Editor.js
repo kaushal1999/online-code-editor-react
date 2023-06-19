@@ -1,45 +1,38 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import { Button } from "@mui/material";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
-import "codemirror/lib/codemirror.css";
-import { Resizable } from "re-resizable";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/material.css";
 
-export default function Editor() {
-  const [width, setWidth] = useState(320);
-  const [height, setHeight] = useState(200);
+require("codemirror/mode/xml/xml");
+require("codemirror/mode/css/css");
+require("codemirror/mode/javascript/javascript");
+
+export default function Editor(props) {
   
+  let open = useRef(true)
+  const [style, setStyle] = useState({flexGrow:"1"})
   return (
-    <div className="container">
-      <Resizable
-        size={{ width: width, height: height }}
-        onResizeStop={(e, direction, ref, d) => {
-          setHeight(height + d.height);
-          setWidth(width + d.width);
+    <div className="container" style={style}>
+      <Button variant="outlined" onClick={() => {
+        open.current = !open.current;
+         if(!open.current)
+           setStyle({ flexGrow: "0" })
+        else 
+           setStyle({ flexGrow: "1" });  
+      }}>
+        {!open.current? <OpenInFullIcon /> : <CloseFullscreenIcon />}
+      </Button>
+
+      <CodeMirror
+        value={props.value}
+        options={props.options}
+        onBeforeChange={(editor, data, value) => {
+          props.onChange(value);
         }}
-      >
-        <div>
-          <Button
-            variant="outlined"
-            onClick={() => {
-              if (width === 20) setWidth(320);
-              else setWidth(20);
-            }}
-          >
-            {(width===20)? <OpenInFullIcon />
-            :<CloseFullscreenIcon/>}
-          </Button>
-        </div>
-        <CodeMirror
-          value="kasuhal"
-          // options={options}
-          onBeforeChange={(editor, data, value) => {
-            this.setState({ value });
-          }}
-          onChange={(editor, data, value) => {}}
-        />
-      </Resizable>
+      />
     </div>
   );
 }
