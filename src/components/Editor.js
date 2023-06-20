@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {  useState } from "react";
 import { Controlled as CodeMirror } from "react-codemirror2";
 import { Button } from "@mui/material";
 import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
@@ -12,19 +12,20 @@ require("codemirror/mode/javascript/javascript");
 
 export default function Editor(props) {
   
-  let open = useRef(true)
-  const [style, setStyle] = useState({flexGrow:"1"})
+  const [open,setOpen] = useState(true)
   return (
-    <div className="container" style={style}>
-      <Button variant="outlined" onClick={() => {
-        open.current = !open.current;
-         if(!open.current)
-           setStyle({ flexGrow: "0" })
-        else 
-           setStyle({ flexGrow: "1" });  
-      }}>
-        {!open.current? <OpenInFullIcon /> : <CloseFullscreenIcon />}
-      </Button>
+    <div className="container" style={open ? { flexGrow: "1" } : { flexGrow: "0" }}>
+      <div className="editor-header">
+        <h>{props.heading}</h>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setOpen(!open)
+          }}
+        >
+          {!open ? <OpenInFullIcon /> : <CloseFullscreenIcon />}
+        </Button>
+      </div>
 
       <CodeMirror
         value={props.value}
