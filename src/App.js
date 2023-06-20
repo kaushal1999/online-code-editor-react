@@ -5,13 +5,15 @@ import CodeIcon from "@mui/icons-material/Code";
 import { useEffect } from 'react';
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { Button } from "@mui/material";
+import useLocalStorage from './Hooks/useLocalStorage';
 
 
 function App() {
-  const [html, setHtml] = useState("")
-  const [css, setCss] = useState("");
-  const [js, setJs] = useState("");
+  const [html, setHtml] = useLocalStorage("html")
+  const [css, setCss] = useLocalStorage("css")
+  const [js, setJs] = useLocalStorage("js")
   const [srcCode, setCode] = useState(`<html></html>`)
+  
   
   useEffect(() => {
     const timeout = setTimeout(() => {
