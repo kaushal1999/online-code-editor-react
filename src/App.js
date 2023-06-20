@@ -3,6 +3,9 @@ import './App.css';
 import Editor from './components/Editor';
 import CodeIcon from "@mui/icons-material/Code";
 import { useEffect } from 'react';
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import { Button } from "@mui/material";
+
 
 function App() {
   const [html, setHtml] = useState("")
@@ -45,6 +48,9 @@ function App() {
       <div>
         <div className="header">
           <CodeIcon></CodeIcon>
+          <Button onClick={()=>window.location.reload()}>
+            <AutorenewIcon></AutorenewIcon>
+          </Button>
         </div>
         <div className="pane top-pane">
           <Editor
@@ -67,10 +73,12 @@ function App() {
           ></Editor>
         </div>
         <div className="bottom-pane"></div>
-        <iframe srcDoc={srcCode} sandbox='allow-scripts' title='output'
-        width="100%">
-        
-        </iframe>
+        <iframe
+          srcDoc={srcCode}
+          sandbox="allow-scripts"
+          title="output"
+          width="100%"
+        ></iframe>
       </div>
     );
   
