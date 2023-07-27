@@ -48,7 +48,7 @@ function App() {
   return (
     <div>
       <div className="header">
-        <CodeIcon></CodeIcon>
+        {/* <CodeIcon></CodeIcon> */}
         <Button
           onClick={() => {
             localStorage.clear();
