@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Editor from "./components/Editor";
-import CodeIcon from "@mui/icons-material/Code";
+// import CodeIcon from "@mui/icons-material/Code";
 import { useEffect } from "react";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { Button } from "@mui/material";
@@ -58,7 +58,7 @@ function App() {
           <AutorenewIcon></AutorenewIcon>
         </Button>
       </div>
-      <div className="pane top-pane">
+      <div className="top-pane">
         <Editor
           onChange={setHtml}
           heading="HTML"
